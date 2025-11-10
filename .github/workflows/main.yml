@@ -1,0 +1,23 @@
+name: Upload WebGL Build to S3
+
+on:
+  push:
+    branches:
+      - dev-build  
+
+jobs:
+  deploy:
+    runs-on: self-hosted  
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload files to S3
+        run: |
+          aws s3 sync . s3://game-builds-staging/SL-TEST/ \
+            --delete \
+            --cache-control "no-cache" \
+            --exclude "*" \
+            --include "build/**" \
+            --include "index.html"
