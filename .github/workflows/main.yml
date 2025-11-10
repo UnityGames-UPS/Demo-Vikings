@@ -19,5 +19,5 @@ jobs:
             --delete \
             --cache-control "no-cache" \
             --exclude "*" \
-            --include "build/**" \
+            --include "Build/*" \
             --include "index.html"
